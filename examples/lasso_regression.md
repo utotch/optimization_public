@@ -64,20 +64,27 @@ end
 ```julia
 # Evaluating the model
 using Plots
-plot(title="Mean Squared Error(MSE)", xscale=:log10, legend=:topleft, xlabel="\\lambda")
-plot!(λs, df[:,:train_errors], label="train_errors")
-plot!(λs, df[:,:test_errors], label="test_errors")
+fig_mse = plot(title="Mean Squared Error(MSE)", xscale=:log10, legend=:topleft, xlabel="\\lambda")
+plot!(λs, df[:,:train_errors], label="train_errors", shape=:c)
+plot!(λs, df[:,:test_errors], label="test_errors", shape=:c)
+fname = dirname(@__FILE__) * "/assets/lasso_mse.png"
+savefig(fname)
+fig_mse
 ```
 
-![](assets/markdown-img-paste-20190301220104420.png)
+![](assets/lasso_mse.png)
+<!-- ![](assets/markdown-img-paste-20190301220104420.png)-->
 
 ```julia
 # Regularization Path
 using Plots
-plot(title="Regularization Path", xscale=:log10, xlabel="\\lambda")
-plot!(λs, hcat(df[:,:β_values]...)')
+fig_reg = plot(title="Regularization Path", xscale=:log10, xlabel="\\lambda")
+plot!(λs, hcat(df[:,:β_values]...)', shape=:c, ms=:1, legend=false)
+fname = dirname(@__FILE__) * "/assets/lasso_regularization_path.png"
+savefig(fname)
+fig_reg
 ```
-
-![](assets/markdown-img-paste-20190301220125870.png)
+![](assets/lasso_regularization_path.png)
+<!-- ![](assets/markdown-img-paste-20190301220125870.png) -->
 
 &copy; Keisuke Uto

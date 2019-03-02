@@ -58,27 +58,35 @@ end
 
 ```julia
 using Plots
-using LaTeXStrings
-
-plot(title="relative reconstruction error", legend=:topleft, xlabel="p")
+# using LaTeXStrings
+default(shape=:c, ms=2)
+fig_err = plot(title="relative reconstruction error", legend=:topleft, xlabel="p")
 plot!(p_vals, lsq_data, label="Least squares")
 plot!(p_vals, huber_data, label="Huber")
 plot!(p_vals, prescient_data, label="Prescient")
 # plot!(ylabel=L"\||\beta - \beta^{\mathrm{true}}\|_2\||\beta^{\mathrm{true}}\||_2") # needs dvipng
+fname = dirname(@__FILE__) * "/assets/huber_relerr.png"
+savefig(fname)
+fig_err
+# ![](assets/huber_relerr.png)
+
 ```
 
 ![](assets/markdown-img-paste-20190301231632813.png)
 
 ```julia
 using Plots
-using LaTeXStrings
-
+# using LaTeXStrings
 indices = p_vals .< 0.08
-plot(title="relative reconstruction error", legend=:topleft, xlabel="p")
+fig_err_zoom = plot(title="relative reconstruction error", legend=:topleft, xlabel="p")
 plot!(p_vals[indices], huber_data[indices], label="Huber")
 plot!(p_vals[indices], prescient_data[indices], label="Prescient")
+fname = dirname(@__FILE__) * "/assets/huber_relerr_zoom.png"
+savefig(fname)
+fig_err_zoom
 ```
 
-![](assets/markdown-img-paste-2019030123171288.png)
+![](assets/huber_relerr_zoom.png)
+<!-- ![](assets/markdown-img-paste-2019030123171288.png) -->
 
 &copy; Keisuke Uto

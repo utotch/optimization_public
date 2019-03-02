@@ -46,8 +46,13 @@ using Plots
 default(shape=:c, ms=2, legend=false)
 figx = plot(x.value', title="Linear MPC", ylabel="x(t)")
 figu = plot(u.value', ylabel="u(t)", xlabel="time", labels=["u1" "u2"],  legend=:best)
-plot(figx, figu, layout=(2,1))
+fig_traj = plot(figx, figu, layout=(2,1))
+fname = dirname(@__FILE__) * "/assets/lmpc_traj.png"
+savefig(fname)
+fig_traj
 ```
 
-![](assets/markdown-img-paste-20190301195905883.png)
+![](assets/lmpc_traj.png)
+<!-- ![](assets/markdown-img-paste-20190301195905883.png) -->
+
 &copy; Keisuke Uto

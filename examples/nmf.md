@@ -24,6 +24,8 @@ using SCS; solver = SCSSolver(verbose=0, max_iters=10000)
 Y = Y_init
 MAX_ITERS = 30
 residual = zeros(MAX_ITERS)
+Ys = zeros(m, k, MAX_ITERS)
+Xs = zeros(k, n, MAX_ITERS)
 
 for iter_num=1:MAX_ITERS
     if isodd(iter_num)
@@ -47,9 +49,36 @@ for iter_num=1:MAX_ITERS
     else
         Y = Y.value
     end
+    Ys[:,:,iter_num] = Y
+    Xs[:,:,iter_num] = X
 end
 ```
+
 ```julia
 using Plots
-plot(residual, title="residual |A-YX|_F", shape=:c, yscale=:log10, legend=false)
+fig = plot(residual, title="residual |A-YX|_F", shape=:c, ms=3, yscale=:log10, legend=false)
+fname = dirname(@__FILE__) * "/assets/nmf_residual.png"
+savefig(fname)
+fig
 ```
+
+![](assets/nmf_residual.png)
+
+```julia
+using Plots
+
+anim = @animate for i=1:MAX_ITERS
+    figY = heatmap(Ys[:,:,i], aspect_ratio=:equal, xticks=false, ytick=false, title="Y")
+    figX = heatmap(Xs[:,:,i], aspect_ratio=:equal, xticks=false, ytick=false, title="X")
+    figR = heatmap(A-Ys[:,:,i]*Xs[:,:,i], aspect_ratio=:equal, xticks=false, ytick=false, title="A-Y*X")
+    fig = plot(figY, figX, figR, layout=(1,3))
+    sleep(0.05)
+    display(fig)
+end
+
+fname = dirname(@__FILE__) * "/assets/nmf.gif"
+gif(anim, fname, fps=5)
+
+```
+
+![](assets/nmf.gif)

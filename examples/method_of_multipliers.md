@@ -52,12 +52,17 @@ fvalue = []
 for t=1:MAX_ITERS
     solve!(minimize(aug_lagr), solver)
     copyto!(y.value, y.value + ρ*evaluate(resid))
-    global fvalue = [err; evaluate(f)]
+    global fvalue = [fvalue; evaluate(f)]
 end
 println("Optimal value from method of multipliers: $(evaluate(f))")
-plot(fvalue, xlabel="p", ylabel="f(x)", label="M of M")
+fig = plot(fvalue, xlabel="p", ylabel="f(x)", label="M of M")
 hline!([prob.optval], label="Convex.jl", legend=:bottomright)
+fname = dirname(@__FILE__) * "/assets/method_of_multipliers.png"
+savefig(fname)
+fig
 ```
-![](assets/markdown-img-paste-20190302001005462.png)
+
+<!-- ![](assets/markdown-img-paste-20190302001005462.png) -->
+![](assets/method_of_multipliers.png)
 
 &copy; Keisuke Uto

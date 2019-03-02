@@ -59,3 +59,5 @@ plot(fvalue, xlabel="p", ylabel="f(x)", label="M of M")
 hline!([prob.optval], label="Convex.jl", legend=:bottomright)
 ```
 ![](assets/markdown-img-paste-20190302001005462.png)
+
+&copy; Keisuke Uto

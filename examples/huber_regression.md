@@ -60,8 +60,7 @@ end
 using Plots
 using LaTeXStrings
 
-plot(title="relative reconstruction error", legend=:topleft,
-    xlabel="p")
+plot(title="relative reconstruction error", legend=:topleft, xlabel="p")
 plot!(p_vals, lsq_data, label="Least squares")
 plot!(p_vals, huber_data, label="Huber")
 plot!(p_vals, prescient_data, label="Prescient")
@@ -75,7 +74,6 @@ using Plots
 using LaTeXStrings
 
 indices = p_vals .< 0.08
-
 plot(title="relative reconstruction error", legend=:topleft, xlabel="p")
 plot!(p_vals[indices], huber_data[indices], label="Huber")
 plot!(p_vals[indices], prescient_data[indices], label="Prescient")

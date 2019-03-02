@@ -43,7 +43,8 @@ mse(X,Y,β) = (1.0/size(X,1)) * evaluate(loss(X,Y,β))[1] # dirty
 
 β = Variable(n)
 λ = Constant([1.0]) # Parameters
-problem = minimize(loss(X,Y,β) +λ*norm(β))
+# problem = minimize(loss(X,Y,β) +λ*sumsquares(β)) # Ridge: |β|_2^2
+problem = minimize(loss(X,Y,β) +λ*norm(β,1)) # Lasso (only change here)
 λs = logspace(-2,3,50)
 
 df = DataFrame(
@@ -67,7 +68,8 @@ plot(title="Mean Squared Error(MSE)", xscale=:log10, legend=:topleft, xlabel="\\
 plot!(λs, df[:,:train_errors], label="train_errors")
 plot!(λs, df[:,:test_errors], label="test_errors")
 ```
-![](assets/markdown-img-paste-20190301214231367.png)
+
+![](assets/markdown-img-paste-20190301220104420.png)
 
 ```julia
 # Regularization Path
@@ -76,6 +78,6 @@ plot(title="Regularization Path", xscale=:log10, xlabel="\\lambda")
 plot!(λs, hcat(df[:,:β_values]...)')
 ```
 
-![](assets/markdown-img-paste-20190301214315303.png)
+![](assets/markdown-img-paste-20190301220125870.png)
 
 &copy; Keisuke Uto

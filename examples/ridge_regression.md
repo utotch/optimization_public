@@ -16,7 +16,7 @@ $$
 using Random
 using Distributions
 
-function generate_data(m=100, n=20, σ=5)
+function generate_data(m, n, σ)
   Random.seed!(0)
   β = randn(n)
   X = randn(m,n)
@@ -38,7 +38,6 @@ using ECOS; solver = ECOSSolver(verbose=0)
 using DataFrames
 
 logspace(start, stop, len) = exp10.(range(start, stop=stop, length=len))
-# loss(X,Y,β) = square(norm(X*β-Y))
 loss(X,Y,β) = square(norm(X*β-Y))
 mse(X,Y,β) = (1.0/size(X,1)) * evaluate(loss(X,Y,β))[1] # dirty
 
@@ -64,8 +63,19 @@ end
 ```julia
 # Evaluating the model
 using Plots
-plot(title="Mean Squared Error(MSE)", xscale=:log10, legend=:topleft)
+plot(title="Mean Squared Error(MSE)", xscale=:log10, legend=:topleft, xlabel="\\lambda")
 plot!(λs, df[:,:train_errors], label="train_errors")
 plot!(λs, df[:,:test_errors], label="test_errors")
 ```
-![](assets/markdown-img-paste-20190301213130416.png)
+![](assets/markdown-img-paste-20190301214231367.png)
+
+```julia
+# Regularization Path
+using Plots
+plot(title="Regularization Path", xscale=:log10, xlabel="\\lambda")
+plot!(λs, hcat(df[:,:β_values]...)')
+```
+
+![](assets/markdown-img-paste-20190301214315303.png)
+
+&copy; Keisuke Uto

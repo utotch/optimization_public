@@ -55,7 +55,7 @@ for t=1:MAX_ITERS
     global fvalue = [err; evaluate(f)]
 end
 println("Optimal value from method of multipliers: $(evaluate(f))")
-plot(fvalue, xlabel="p", ylabel="f(x)")
-hline!([prob.optval])
+plot(fvalue, xlabel="p", ylabel="f(x)", label="M of M")
+hline!([prob.optval], label="Convex.jl", legend=:bottomright)
 ```
-![](assets/markdown-img-paste-20190301235811748.png)
+![](assets/markdown-img-paste-20190302001005462.png)

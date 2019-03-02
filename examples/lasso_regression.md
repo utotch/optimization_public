@@ -1,12 +1,12 @@
-# Ridge Regression
-* https://www.cvxpy.org/examples/machine_learning/ridge_regression.html
-* https://nbviewer.jupyter.org/github/cvxgrp/cvxpy/blob/1.0/examples/machine_learning/ridge_regression.ipynb
+# Lasso Regression
+* https://www.cvxpy.org/examples/machine_learning/lasso_regression.html
+* https://nbviewer.jupyter.org/github/cvxgrp/cvxpy/blob/1.0/examples/machine_learning/lasso_regression.ipynb
 
 Convex.jl sample
 
 $$
 \begin{aligned}
-f(\beta) = \|X \beta - Y\|_2^2 +\lambda \|\beta\|_2^2 \\
+f(\beta) = \|X \beta - Y\|_2^2 +\lambda \|\beta\|_1 \\
 \end{aligned}
 $$
 
@@ -43,7 +43,7 @@ mse(X,Y,β) = (1.0/size(X,1)) * evaluate(loss(X,Y,β))[1] # dirty
 
 β = Variable(n)
 λ = Constant([1.0]) # Parameters
-problem = minimize(loss(X,Y,β) +λ*sumsquares(β)) # |β|_2^2
+problem = minimize(loss(X,Y,β) +λ*norm(β))
 λs = logspace(-2,3,50)
 
 df = DataFrame(
@@ -67,7 +67,7 @@ plot(title="Mean Squared Error(MSE)", xscale=:log10, legend=:topleft, xlabel="\\
 plot!(λs, df[:,:train_errors], label="train_errors")
 plot!(λs, df[:,:test_errors], label="test_errors")
 ```
-![](assets/markdown-img-paste-20190301215434506.png)
+![](assets/markdown-img-paste-20190301214231367.png)
 
 ```julia
 # Regularization Path
@@ -76,6 +76,6 @@ plot(title="Regularization Path", xscale=:log10, xlabel="\\lambda")
 plot!(λs, hcat(df[:,:β_values]...)')
 ```
 
-![](assets/markdown-img-paste-20190301215504457.png)
+![](assets/markdown-img-paste-20190301214315303.png)
 
 &copy; Keisuke Uto

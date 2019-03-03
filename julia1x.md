@@ -14,8 +14,7 @@ A = sparse([1 2; 3 4])  # dense -> sparse
 B = Array(A)            # sparse -> dense
 ```
 
-# linsp
-ace
+# linspace
 ```julia
 LinRange(10, 20, 5) # linspace(10, 20, 5)
 ```

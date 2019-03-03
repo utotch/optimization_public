@@ -19,3 +19,11 @@ ace
 ```julia
 LinRange(10, 20, 5) # linspace(10, 20, 5)
 ```
+
+# blkdiag (for dense matrix)
+```julia
+using SparseArrays
+blkdiag_(As...) = Array(blockdiag(map(sparse, As)...))
+# blockdiag([1 2; 3 4], ones(3,3)) for dense
+blkdiag_([1 2; 3 4], ones(3,3))
+```

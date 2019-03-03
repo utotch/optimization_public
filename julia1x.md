@@ -1,4 +1,4 @@
-# Use Julia 1.x withou crying
+# Use Julia 1.x without crying
 
 # eye
 ```julia

@@ -82,3 +82,5 @@ gif(anim, fname, fps=5)
 ```
 
 ![](assets/nmf.gif)
+
+&copy; Keisuke Uto

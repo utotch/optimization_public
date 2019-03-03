@@ -1,10 +1,17 @@
 # Use Julia 1.x without crying
+&copy; Keisuke Uto
 
 # eye
 ```julia
 using LinearAlgebra
 eye(n) = Matrix{Float64}(I,n,n)   # Dense eye
 speye(n) = Diagonal{Float64}(I,n) # Sparse eye
+```
+
+# srand
+```julia
+using Random
+Random.seed!(0)
 ```
 
 # sparse

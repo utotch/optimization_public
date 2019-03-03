@@ -2,7 +2,7 @@
 &copy; Keisuke Uto
 
 
-I want to share basic methods to convex optimization in Julia.
+I want to share basic convex optimization methods in Julia.
 I think these codes includes useful tips for using Convex.jl.
 
 ## Reimplementation of cvxpy sample

@@ -3,7 +3,7 @@
 
 $$
 \begin{aligned}
-& \underset{x}{\text{minimize}} & & \|A-YX\|_F \\
+& \underset{X,Y}{\text{minimize}} & & \|A-YX\|_F \\
 & \text{s.t.} & & X \ge 0, \: Y \ge 0\\
 \end{aligned}
 $$

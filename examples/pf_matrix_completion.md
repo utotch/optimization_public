@@ -1,5 +1,9 @@
-# Perron-Frobenius matrix completion
+# Perron-Frobenius matrix completion (Pending)
 &copy; Keisuke Uto
+
+Convex.jl can't solve lambdamax(asymmetric_matrix). argument are restricted to be symmetric matrix(?).
+
+[cvxpy pf_eigenvalue](https://github.com/cvxgrp/cvxpy/blob/master/cvxpy/atoms/pf_eigenvalue.py) can treat elementwise positive matrix.
 
 ## original formulation (non-convex)
 $$
@@ -19,8 +23,9 @@ $$
 \end{aligned}
 $$
 
+
 ```julia
-# Debugging: Result is not same as cvxpy
+# Debugging: Result is worse (grater) than cvxpy
 using Convex
 using SCS; solver = SCSSolver(verbose=0)
 
@@ -43,11 +48,12 @@ Convex.solve!(prob, solver)
 @show prob.optval
 @show U.value
 X=exp.(U.value)
-show(IOContext(stdout), "text/plain", X)
+show(IOContext(stdout), "text/plain", X) # result is wrong because it is restricted to symmetric
 println()
-@show X[1,2] * X[2,1] * X[2,3] * X[3,3]
+# @show X[1,2] * X[2,1] * X[2,3] * X[3,3]
 
-Y = [1.         4.63616907 1.9
-     0.49991744 0.8        0.37774148
-     3.2        5.9        1.14221476]
+X_true = [1.         4.63616907 1.9
+          0.49991744 0.8        0.37774148
+          3.2        5.9        1.14221476]
+# [Debugging] Result is worse than cvxpy
 ```

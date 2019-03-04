@@ -2,6 +2,7 @@
 &copy; Keisuke Uto
 * [Maximizing the volume of a box(cvxpy)](https://www.cvxpy.org/examples/dgp/max_volume_box.html)
 
+## original formulation (non-convex)
 $$
 \begin{aligned}
 & \underset{h, w, d \in \mathbb{R}_+}{\text{maximize}} & & hwd \\
@@ -12,6 +13,7 @@ $$
 \end{aligned}
 $$
 
+## convex formulation
 $$
 \begin{aligned}
 & \underset{u_h, u_w, u_d \in \mathbb{R}}{\text{maximize}} & & u_h + u_w + u_d \\

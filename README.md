@@ -31,3 +31,5 @@ Thanks for useful [examples in cvxpy](https://www.cvxpy.org/examples/index.html)
 * [cvxpy](https://www.cvxpy.org/)
 * [Convex.jl](https://github.com/JuliaOpt/Convex.jl)
   * [convex operations in Convex.jl](https://convexjl.readthedocs.io/en/latest/operations.html)
+
+if you find mistakes, please tell me in [issue](https://github.com/utotch/optimization_public/issues).

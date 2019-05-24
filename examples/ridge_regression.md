@@ -43,7 +43,7 @@ mse(X,Y,β) = (1.0/size(X,1)) * evaluate(loss(X,Y,β))[1] # dirty
 
 β = Variable(n)
 λ = Constant([1.0]) # Parameters
-problem = minimize(loss(X,Y,β) +λ*sumsquares(β)) # |β|_2^2
+problem = minimize(loss(X_train,Y_train,β) +λ*sumsquares(β)) # |β|_2^2
 λs = logspace(-2,3,50)
 
 df = DataFrame(
